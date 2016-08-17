@@ -1,70 +1,62 @@
-# Render time calculator
+# render time calculator
 from datetime import datetime, timedelta
-#########################################################
-# How many frames
-print ("How many frames?")								# Question
-frames = (raw_input(">"))								# Frames input
+
+# how many frames
+print ("How many frames?")
+frames = (raw_input(">"))
 print("")
 print ("Render time per frame? Input time hh:mm:ss")
-ftime = raw_input(">")									# Render time input
+ftime = raw_input(">")
 if "-" in frames:
-	f_range = frames.split("-")
-	s_range = int(f_range[0])
-	e_range = int(f_range[1])
-	frames = int(e_range - s_range)
+    f_range = frames.split("-")
+    s_range = int(f_range[0])
+    e_range = int(f_range[1])
+    frames = int(e_range - s_range)
 else:
-	frames = int(frames)	
-mode = ftime.count(":")									# Get right mode from counting dashes
-parse = ftime.split(":")								# Parse input
-#########################################################
-# Mode selection
-if mode == 2:											# Mode hh-mm-ss
-	hours = int(parse[0])								# Get hours
-	minutes = int(parse[1])								# Get minutes
-	seconds = int(parse[2])								# Get seconds
+    frames = int(frames)    
+mode = ftime.count(":")
+parse = ftime.split(":")
 
-	# Convert render times to seconds
-	htime = hours*60*60									# Hours in seconds
-	mtime = minutes*60									# Minutes in seconds
-	stime = seconds 									# Seconds in seconds
+# mode hh-mm-ss
+if mode == 2:
+    hours = int(parse[0])
+    minutes = int(parse[1])
+    seconds = int(parse[2])
 
-	# Calculate some stuff
-	render_time = (htime + mtime + stime)*frames		# Add everything together
+    htime = hours*60*60
+    mtime = minutes*60
+    stime = seconds    
+    render_time = (htime + mtime + stime)*frames
 
-	# Results
-	sec = timedelta(seconds=int(render_time))
-	d = datetime(1,1,1) + sec
-	print("")
-	print("Rendering %d frames takes:\n%d days, %d hours, %d minutes, %d seconds" % (frames, d.day-1, d.hour, d.minute, d.second))
-#########################################################
-elif mode == 1:											# Mode mm-ss
-	minutes = int(parse[0])								# Get minutes
-	seconds = int(parse[1])								# Get seconds
+    sec = timedelta(seconds=int(render_time))
+    d = datetime(1,1,1) + sec
+    print("")
+    print("Rendering %d frames takes:\n%d days, %d hours, %d minutes, %d seconds" % (frames, d.day-1, d.hour, d.minute, d.second))
+# mode mm-ss
+elif mode == 1:
+    minutes = int(parse[0])
+    seconds = int(parse[1])
 
-	# Convert render times to seconds
-	mtime = minutes*60									# Minutes in seconds
-	stime = seconds 									# Seconds in seconds
+    mtime = minutes*60
+    stime = seconds
+    render_time = (mtime + stime)*frames
 
-	# Calculate some stuff
-	render_time = (mtime + stime)*frames 				# Add everything together
+    # result
+    sec = timedelta(seconds=int(render_time))
+    d = datetime(1,1,1) + sec
+    print("")
+    print("Rendering %d frames takes:\n%d days, %d hours, %d minutes, %d seconds" % (frames, d.day-1, d.hour, d.minute, d.second))
 
-	# Results
-	sec = timedelta(seconds=int(render_time))
-	d = datetime(1,1,1) + sec
-	print("")
-	print("Rendering %d frames takes:\n%d days, %d hours, %d minutes, %d seconds" % (frames, d.day-1, d.hour, d.minute, d.second))
-#########################################################
-elif mode == 0:											# Mode ss
-	stime = int(parse[0])								# Get seconds
+# mode ss
+elif mode == 0:
+    stime = int(parse[0])
+    render_time = stime*frames
 
-	# Calculate overall render time
-	render_time = stime*frames							# Add everything together
+    # result
+    sec = timedelta(seconds=int(render_time))
+    d = datetime(1,1,1) + sec
+    print("")
+    print("Rendering %d frames takes:\n%d days, %d hours, %d minutes, %d seconds" % (frames, d.day-1, d.hour, d.minute, d.second))
 
-	# Final calculation and print results
-	sec = timedelta(seconds=int(render_time))
-	d = datetime(1,1,1) + sec
-	print("")
-	print("Rendering %d frames takes:\n%d days, %d hours, %d minutes, %d seconds" % (frames, d.day-1, d.hour, d.minute, d.second))
-#########################################################
-# End
+# end
 void = raw_input(">Exit");
