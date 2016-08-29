@@ -1,4 +1,5 @@
 # cinema 4d multi-passes to own folders
+# does not support object buffers
 import os
 import re
 
